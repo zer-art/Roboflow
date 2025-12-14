@@ -55,11 +55,26 @@ For a detailed breakdown of why we use **Reinforcement Learning (PPO)** instead 
 2. **Run Simulation**: Execute the main simulation script (to be implemented in `src/`).
 3. **Analyze Results**: Check the `results/` folder for logs and metric reports. Use the notebooks in `notebooks/` for detailed analysis.
 
-## Metrics to be Tested
+## 6. Detailed Testing Scenarios
+We will rigorously test the system against three core scenarios to demonstrate Efficiency, Safety, and Resilience.
 
-- Effectiveness metrics
-- Performance comparisons (Current vs. Proposed)
-- [Add specific metrics here]
+### Scenario A: The "Overtake" (Efficiency)
+*   **Situation**: A slow *Goods train* is ahead of a fast *Vande Bharat* express.
+*   **Human Logic (Baseline)**: Often keeps the Goods train moving until a major junction, causing the Vande Bharat to trail behind and accumulate delay.
+*   **RailFlow AI**: Identifies a small loop line 10km ahead, calculates that the Goods train length fits, and executes a "dynamic overtake" (sidelining the Goods train just in time).
+*   **Target Metric**: "Vande Bharat Delay Reduced by 15 mins."
+
+### Scenario B: The "Deadlock Prevention" (Safety/OR)
+*   **Situation**: Two trains are approaching a single-line section from opposite directions.
+*   **Human Logic**: Might accidentally let both enter up to the last signal, causing a standoff where one has to reverse (massive delay).
+*   **RailFlow AI**: The MILP (Operations Research) layer detects this conflict 30 minutes in advance and holds one train at the previous station.
+*   **Visual Outcome**: "Safety Shield" triggers an override, preventing the deadlock.
+
+### Scenario C: The "Cascading Delay" (Resilience)
+*   **Situation**: A signal fails at a major station for 20 minutes.
+*   **Human Logic**: Manually re-plans, often causing ripples that last 6 hours across the network.
+*   **RailFlow AI**: Re-optimizes the entire schedule in seconds, shuffling 10 other trains to different tracks to absorb the shock.
+*   **Target Metric**: "Network Recovery Time: 2 hours (AI) vs 6 hours (Historical)."
 
 ## Reference Documents
 
