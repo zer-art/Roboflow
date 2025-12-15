@@ -4,3 +4,8 @@ matplotlib
 scipy
 jupyter
 pytest
+gymnasium
+simpy
+stable-baselines3
+shimmy
+tensorboard
